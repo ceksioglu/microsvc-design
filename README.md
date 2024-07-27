@@ -1,6 +1,9 @@
 # microsvc-design
  Microservice Design Project
 
+## Architecture Diagram
+
+```mermaid
 graph TD
     A[React Frontend] -->|HTTP| B[API Gateway]
     B -->|HTTP| C[Command Service]
@@ -12,3 +15,4 @@ graph TD
     D -->|Read| H[(Redis)]
     I[Event Handler] -->|Update| H
     E -->|Consume Events| I
+```
