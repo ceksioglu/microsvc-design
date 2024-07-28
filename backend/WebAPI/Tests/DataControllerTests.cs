@@ -3,10 +3,10 @@ using WebAPI.Service.abstracts;
 using WebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using RabbitMQ.Client;
+using StackExchange.Redis;
 using Xunit;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Order = WebAPI.Models.Order;
 
 namespace WebAPI.Tests
 {
@@ -20,6 +20,8 @@ namespace WebAPI.Tests
     {
         private readonly Mock<IQueryService> _mockQueryService;
         private readonly Mock<ICommandService> _mockCommandService;
+        private readonly Mock<ConnectionFactory> _mockRabbitMQFactory;
+        private readonly Mock<IConnectionMultiplexer> _mockRedisConnection;
         private readonly DataOperationsController _controller;
 
         /// <summary>
@@ -30,24 +32,31 @@ namespace WebAPI.Tests
         {
             _mockQueryService = new Mock<IQueryService>();
             _mockCommandService = new Mock<ICommandService>();
-            _controller = new DataOperationsController(_mockQueryService.Object, _mockCommandService.Object);
+            _mockRabbitMQFactory = new Mock<ConnectionFactory>();
+            _mockRedisConnection = new Mock<IConnectionMultiplexer>();
+
+            _controller = new DataOperationsController(
+                _mockQueryService.Object,
+                _mockCommandService.Object,
+                _mockRabbitMQFactory.Object,
+                _mockRedisConnection.Object
+            );
         }
 
+
         /// <summary>
-        /// Tests that GetUserDashboardAsync returns an OK result with the correct UserDashboardResponse
+        /// Tests that GetUserDashboardAsync returns an OK result with the correct DashboardData
         /// when the query service successfully returns dashboard data.
         /// </summary>
         [Fact]
-        public async Task GetUserDashboardAsync_ReturnsOkResult_WithUserDashboardResponse()
+        public async Task GetUserDashboardAsync_ReturnsOkResult_WithDashboardData()
         {
             // Arrange: Set up mock dashboard data
             var dashboardData = new DashboardData
             {
-                UserId = "123",
-                Username = "testuser",
                 RecentOrders = new List<OrderSummary>
                 {
-                    new OrderSummary { OrderId = "ORDER1", OrderDate = DateTime.Now, TotalAmount = 100.00m, Status = "Completed" }
+                    new OrderSummary { OrderId = 1, OrderDate = DateTime.Now, TotalAmount = 100.00m, Status = "Completed" }
                 },
                 TotalOrders = 1,
                 TotalSpent = 100.00m
@@ -61,11 +70,9 @@ namespace WebAPI.Tests
 
             // Assert: Verify the result type and content
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnValue = Assert.IsType<UserDashboardResponse>(okResult.Value);
-            Assert.Equal(dashboardData.UserId, returnValue.DashboardData.UserId);
-            Assert.Equal(dashboardData.Username, returnValue.DashboardData.Username);
-            Assert.Equal(dashboardData.TotalOrders, returnValue.DashboardData.TotalOrders);
-            Assert.Equal(dashboardData.TotalSpent, returnValue.DashboardData.TotalSpent);
+            var returnValue = Assert.IsType<DashboardData>(okResult.Value);
+            Assert.Equal(dashboardData.TotalOrders, returnValue.TotalOrders);
+            Assert.Equal(dashboardData.TotalSpent, returnValue.TotalSpent);
         }
 
         /// <summary>
@@ -89,21 +96,16 @@ namespace WebAPI.Tests
         }
 
         /// <summary>
-        /// Tests that GetInventoryStatusAsync returns an OK result with the correct InventoryStatusResponse
+        /// Tests that GetInventoryStatusAsync returns an OK result with the correct List of Products
         /// when the query service successfully returns inventory data.
         /// </summary>
         [Fact]
-        public async Task GetInventoryStatusAsync_ReturnsOkResult_WithInventoryStatusResponse()
+        public async Task GetInventoryStatusAsync_ReturnsOkResult_WithListOfProducts()
         {
             // Arrange: Set up mock inventory data
-            var inventoryData = new InventoryData
+            var inventoryData = new List<Product>
             {
-                Products = new List<ProductInventory>
-                {
-                    new ProductInventory { ProductId = "PROD1", ProductName = "Test Product", StockQuantity = 10, Price = 19.99m }
-                },
-                TotalProducts = 1,
-                LowStockCount = 0
+                new Product { Id = 1, Name = "Test Product", StockQuantity = 10, Price = 19.99m }
             };
 
             _mockQueryService.Setup(service => service.GetInventoryStatusAsync())
@@ -114,10 +116,10 @@ namespace WebAPI.Tests
 
             // Assert: Verify the result type and content
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnValue = Assert.IsType<InventoryStatusResponse>(okResult.Value);
-            Assert.Equal(inventoryData.TotalProducts, returnValue.InventoryData.TotalProducts);
-            Assert.Equal(inventoryData.LowStockCount, returnValue.InventoryData.LowStockCount);
-            Assert.Equal(inventoryData.Products[0].ProductId, returnValue.InventoryData.Products[0].ProductId);
+            var returnValue = Assert.IsType<List<Product>>(okResult.Value);
+            Assert.Single(returnValue);
+            Assert.Equal(inventoryData[0].Id, returnValue[0].Id);
+            Assert.Equal(inventoryData[0].Name, returnValue[0].Name);
         }
 
         /// <summary>
@@ -141,44 +143,45 @@ namespace WebAPI.Tests
         }
 
         /// <summary>
-        /// Tests that CreateOrderAsync returns an OK result with a boolean value
+        /// Tests that CreateOrderAsync returns an OK result with the created Order
         /// when the command service successfully processes the order creation request.
         /// </summary>
         [Fact]
-        public async Task CreateOrderAsync_ReturnsOkResult_WithBooleanValue()
+        public async Task CreateOrderAsync_ReturnsOkResult_WithCreatedOrder()
         {
-            // Arrange: Set up mock order request and service response
-            var orderRequest = new CreateOrderRequest
+            // Arrange: Set up mock order and service response
+            var order = new Order
             {
-                OrderId = "ORDER1",
-                CustomerId = "CUST1",
+                Id = 1,
                 OrderDate = DateTime.Now,
+                Status = "Created",
+                TotalAmount = 39.98m,
                 Items = new List<OrderItem>
                 {
-                    new OrderItem { ProductId = "PROD1", ProductName = "Test Product", Quantity = 2, UnitPrice = 19.99m }
+                    new OrderItem { ProductId = 1, Quantity = 2, UnitPrice = 19.99m }
                 },
                 ShippingAddress = new ShippingAddress
                 {
-                    Street = "123 Test St",
+                    FullName = "Test User",
+                    AddressLine1 = "123 Test St",
                     City = "Test City",
                     State = "TS",
-                    ZipCode = "12345",
+                    PostalCode = "12345",
                     Country = "Test Country"
-                },
-                PaymentMethod = "Credit Card",
-                TotalAmount = 39.98m
+                }
             };
 
-            _mockCommandService.Setup(service => service.CreateOrderAsync(It.IsAny<CreateOrderRequest>()))
-                .ReturnsAsync(true);
+            _mockCommandService.Setup(service => service.CreateOrderAsync(It.IsAny<Order>()))
+                .ReturnsAsync(order);
 
             // Act: Call the controller method
-            var result = await _controller.CreateOrderAsync(orderRequest);
+            var result = await _controller.CreateOrderAsync(order);
 
             // Assert: Verify the result type and content
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnValue = Assert.IsType<bool>(okResult.Value);
-            Assert.True(returnValue);
+            var returnValue = Assert.IsType<Order>(okResult.Value);
+            Assert.Equal(order.Id, returnValue.Id);
+            Assert.Equal(order.TotalAmount, returnValue.TotalAmount);
         }
 
         /// <summary>
@@ -189,51 +192,44 @@ namespace WebAPI.Tests
         public async Task CreateOrderAsync_ReturnsBadRequest_WhenModelStateIsInvalid()
         {
             // Arrange: Add a model error to simulate invalid model state
-            _controller.ModelState.AddModelError("OrderId", "OrderId is required");
+            _controller.ModelState.AddModelError("TotalAmount", "TotalAmount is required");
 
-            // Act: Call the controller method with an empty request
-            var result = await _controller.CreateOrderAsync(new CreateOrderRequest());
+            // Act: Call the controller method with an empty order
+            var result = await _controller.CreateOrderAsync(new Order());
 
             // Assert: Verify the result type
             Assert.IsType<BadRequestObjectResult>(result);
         }
 
         /// <summary>
-        /// Tests that SubmitFeedbackAsync returns an OK result with a boolean value
+        /// Tests that SubmitFeedbackAsync returns an OK result with the submitted Feedback
         /// when the command service successfully processes the feedback submission request.
         /// </summary>
         [Fact]
-        public async Task SubmitFeedbackAsync_ReturnsOkResult_WithBooleanValue()
+        public async Task SubmitFeedbackAsync_ReturnsOkResult_WithSubmittedFeedback()
         {
-            // Arrange: Set up mock feedback request and service response
-            var feedbackRequest = new SubmitFeedbackRequest
+            // Arrange: Set up mock feedback and service response
+            var feedback = new Feedback
             {
-                FeedbackId = "FB1",
-                CustomerId = "CUST1",
-                OrderReference = "ORDER1",
-                SubmissionDate = DateTime.Now,
-                OverallRating = 5,
-                Categories = new FeedbackCategories
-                {
-                    ProductQuality = 5,
-                    Delivery = 4,
-                    CustomerService = 5
-                },
-                Comments = "Great service!",
-                WouldRecommend = true,
-                Tags = new List<string> { "fast", "quality" }
+                Id = 1,
+                UserId = 1,
+                Category = "Product",
+                Comment = "Great product!",
+                Rating = 5,
+                SubmissionDate = DateTime.Now
             };
 
-            _mockCommandService.Setup(service => service.SubmitFeedbackAsync(It.IsAny<SubmitFeedbackRequest>()))
-                .ReturnsAsync(true);
+            _mockCommandService.Setup(service => service.SubmitFeedbackAsync(It.IsAny<Feedback>()))
+                .ReturnsAsync(feedback);
 
             // Act: Call the controller method
-            var result = await _controller.SubmitFeedbackAsync(feedbackRequest);
+            var result = await _controller.SubmitFeedbackAsync(feedback);
 
             // Assert: Verify the result type and content
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var returnValue = Assert.IsType<bool>(okResult.Value);
-            Assert.True(returnValue);
+            var returnValue = Assert.IsType<Feedback>(okResult.Value);
+            Assert.Equal(feedback.Id, returnValue.Id);
+            Assert.Equal(feedback.Comment, returnValue.Comment);
         }
 
         /// <summary>
@@ -244,10 +240,10 @@ namespace WebAPI.Tests
         public async Task SubmitFeedbackAsync_ReturnsBadRequest_WhenModelStateIsInvalid()
         {
             // Arrange: Add a model error to simulate invalid model state
-            _controller.ModelState.AddModelError("OverallRating", "OverallRating is required");
+            _controller.ModelState.AddModelError("Rating", "Rating is required");
 
-            // Act: Call the controller method with an empty request
-            var result = await _controller.SubmitFeedbackAsync(new SubmitFeedbackRequest());
+            // Act: Call the controller method with an empty feedback
+            var result = await _controller.SubmitFeedbackAsync(new Feedback());
 
             // Assert: Verify the result type
             Assert.IsType<BadRequestObjectResult>(result);
