@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\Email\\backend\\email-webapp\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\Email\\backend\\email-webapp\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\Email\\backend\\email-webapp\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\Email\\backend\\email-webapp\\WebAPI\\WebAPI.csproj",
+        "projectPath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\WebAPI.csproj",
         "packagesPath": "C:\\Users\\ceksi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\Email\\backend\\email-webapp\\WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ceksi\\AppData\\Roaming\\NuGet\\NuGet.Config"

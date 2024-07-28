@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l+KlxKAjG3GKHmEEmCr5XztyiWfDpALFLyihpQ11SR3Q8Oro3ElhZW3Ji+ByCks+0LlSaZWAGMCJtvlLbOeU4A==",
+  "dgSpecHash": "2hvzstc9DBpkapvkVO/+ZyJB9w8QlgYyWeKkly3GNNgA5CyS/sGdSjAtaE9wxj3Jvv1Kvfb11EcKBbqg6tBDwA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\Email\\backend\\email-webapp\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ceksi\\.nuget\\packages\\autofac\\8.0.0\\autofac.8.0.0.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\autofac.extensions.dependencyinjection\\9.0.0\\autofac.extensions.dependencyinjection.9.0.0.nupkg.sha512",
