@@ -1,5 +1,5 @@
 import React from 'react';
-import './DataOperations.css'; // Make sure this CSS file includes button styles
+import './DataOperations.css';
 
 const Button = ({ children, onClick, type = 'button', className = '' }) => {
   return (
