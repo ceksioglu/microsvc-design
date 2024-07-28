@@ -4,35 +4,41 @@ using Npgsql;
 using RabbitMQ.Client;
 using WebAPI.Models;
 using WebAPI.Service.abstracts;
+using WebAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Service.concretes
 {
     /// <summary>
     /// Implements the ICommandService interface for handling write operations.
+    /// This service interacts with PostgreSQL for data persistence and RabbitMQ for event publishing.
     /// </summary>
     public class CommandService : ICommandService
     {
-        private readonly string _connectionString;
+        private readonly ApplicationDbContext _dbContext;
         private readonly ConnectionFactory _rabbitMQFactory;
 
-        public CommandService(string connectionString, ConnectionFactory rabbitMQFactory)
+        /// <summary>
+        /// Initializes a new instance of the CommandService class.
+        /// </summary>
+        /// <param name="dbContext">The database context for Entity Framework operations.</param>
+        /// <param name="rabbitMQFactory">The RabbitMQ connection factory for message queue operations.</param>
+        public CommandService(ApplicationDbContext dbContext, ConnectionFactory rabbitMQFactory)
         {
-            _connectionString = connectionString;
+            _dbContext = dbContext;
             _rabbitMQFactory = rabbitMQFactory;
         }
 
-        public async Task<bool> CreateOrderAsync(CreateOrderRequest request)
+        /// <summary>
+        /// Creates a new order asynchronously.
+        /// </summary>
+        /// <param name="order">The order to be created.</param>
+        /// <returns>The created order with its assigned ID.</returns>
+        public async Task<Order> CreateOrderAsync(Order order)
         {
-            // Write to PostgreSQL
-            using (var connection = new NpgsqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                using (var cmd = new NpgsqlCommand("INSERT INTO orders (data) VALUES (@data)", connection))
-                {
-                    cmd.Parameters.AddWithValue("data", JsonConvert.SerializeObject(request));
-                    await cmd.ExecuteNonQueryAsync();
-                }
-            }
+            // Write to PostgreSQL using Entity Framework
+            _dbContext.Orders.Add(order);
+            await _dbContext.SaveChangesAsync();
 
             // Publish event to RabbitMQ
             using (var connection = _rabbitMQFactory.CreateConnection())
@@ -44,7 +50,7 @@ namespace WebAPI.Service.concretes
                                      autoDelete: false,
                                      arguments: null);
 
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request));
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(order));
 
                 channel.BasicPublish(exchange: "",
                                      routingKey: "order_created",
@@ -52,21 +58,19 @@ namespace WebAPI.Service.concretes
                                      body: body);
             }
 
-            return true;
+            return order;
         }
 
-        public async Task<bool> SubmitFeedbackAsync(SubmitFeedbackRequest request)
+        /// <summary>
+        /// Submits feedback asynchronously.
+        /// </summary>
+        /// <param name="feedback">The feedback to be submitted.</param>
+        /// <returns>The submitted feedback with its assigned ID.</returns>
+        public async Task<Feedback> SubmitFeedbackAsync(Feedback feedback)
         {
-            // Write to PostgreSQL
-            using (var connection = new NpgsqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                using (var cmd = new NpgsqlCommand("INSERT INTO feedback (data) VALUES (@data)", connection))
-                {
-                    cmd.Parameters.AddWithValue("data", JsonConvert.SerializeObject(request));
-                    await cmd.ExecuteNonQueryAsync();
-                }
-            }
+            // Write to PostgreSQL using Entity Framework
+            _dbContext.Feedbacks.Add(feedback);
+            await _dbContext.SaveChangesAsync();
 
             // Publish event to RabbitMQ
             using (var connection = _rabbitMQFactory.CreateConnection())
@@ -78,7 +82,7 @@ namespace WebAPI.Service.concretes
                                      autoDelete: false,
                                      arguments: null);
 
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request));
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(feedback));
 
                 channel.BasicPublish(exchange: "",
                                      routingKey: "feedback_submitted",
@@ -86,7 +90,7 @@ namespace WebAPI.Service.concretes
                                      body: body);
             }
 
-            return true;
+            return feedback;
         }
     }
 }

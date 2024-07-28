@@ -7,18 +7,7 @@ namespace WebAPI.Service.abstracts
     /// </summary>
     public interface ICommandService
     {
-        /// <summary>
-        /// Creates a new order in the system.
-        /// </summary>
-        /// <param name="request">The order details.</param>
-        /// <returns>A task that represents the asynchronous operation. The task result indicates whether the operation was successful.</returns>
-        Task<bool> CreateOrderAsync(CreateOrderRequest request);
-
-        /// <summary>
-        /// Submits customer feedback.
-        /// </summary>
-        /// <param name="request">The feedback details.</param>
-        /// <returns>A task that represents the asynchronous operation. The task result indicates whether the operation was successful.</returns>
-        Task<bool> SubmitFeedbackAsync(SubmitFeedbackRequest request);
+        Task<Order> CreateOrderAsync(Order order);
+        Task<Feedback> SubmitFeedbackAsync(Feedback feedback);
     }
 }
