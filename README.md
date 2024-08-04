@@ -4,10 +4,10 @@
 
 | Date Range | Phase | Tasks |
 |------------|-------|-------|
-| Juny 2024 - Aug 2024 | Backend Development | - Basic Structure<br>- Database Setup<br>- Caching & Message Queue<br>- API Endpoints |
+| July 2024 - Aug 2024 | Backend Development | - Basic Structure<br>- Database Setup<br>- Caching & Message Queue<br>- API Endpoints |
 | June 2024 - July 2024 | Frontend Development | - Initial Setup<br>- Frontend-Backend Integration<br>- User Interface Development<br>- State Management |
 | Aug 2024 - Sep 2024 | Integration & Testing | - Authentication & Authorization<br>- Error Handling & Validation<br>- Testing |
-| Jul 2024 - Nov 2024 | Optimization & Deployment | - Performance Optimization<br>- Logging & Monitoring<br>- Security Audit<br>- Documentation<br>- Deployment |
+| Sep 2024 - Nov 2024 | Optimization & Deployment | - Performance Optimization<br>- Logging & Monitoring<br>- Security Audit<br>- Documentation<br>- Deployment |
 
 ## Current Status (as of July 2024):
 - API development is complete.
