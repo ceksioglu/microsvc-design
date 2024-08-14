@@ -9,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.0.0" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.6"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
@@ -23,6 +24,18 @@
         <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
         <PackageReference Include="xunit" Version="2.9.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controller\" />
+      <Folder Include="Migrations\" />
+      <Folder Include="MQ\" />
+      <Folder Include="Tests\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="EventHandler\EventHandler.csproj" />
+      <ProjectReference Include="SagaOrchestrator\SagaOrchestrator.csproj" />
     </ItemGroup>
 
 </Project>

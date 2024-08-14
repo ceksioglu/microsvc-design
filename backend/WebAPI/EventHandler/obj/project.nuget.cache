@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "g/jBkka4r17ohsoe4cbTY69oaoxYwDxI5tWV5BIdAUqLZYJ/R09kE5iu6gD+iSJsNPILOlGFdT2w55pXxjqkNQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\EventHandler\\EventHandler.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\rabbitmq.client\\6.8.1\\rabbitmq.client.6.8.1.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\stackexchange.redis\\2.8.0\\stackexchange.redis.2.8.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

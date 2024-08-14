@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "V6rUPUEPgT/NrHgZ6S/88UI+YRvKaD7mmRj741NEGJaKRdrykaj8ZQfByL3FUO85/BwwHwSEoq5brSw8A+nj/w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\AOP\\AOP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ceksi\\.nuget\\packages\\postsharp\\2024.1.5\\postsharp.2024.1.5.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\postsharp.redist\\2024.1.5\\postsharp.redist.2024.1.5.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.31\\microsoft.netcore.app.ref.6.0.31.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.31\\microsoft.windowsdesktop.app.ref.6.0.31.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.31\\microsoft.aspnetcore.app.ref.6.0.31.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
