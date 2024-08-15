@@ -7,6 +7,5 @@ namespace WebAPI.Data.abstracts
         Task<Product> AddAsync(Product product);
         Task<Product> UpdateAsync(Product product);
         Task<bool> DeleteAsync(int id);
-        Task<bool> UpdateStockQuantityAsync(int id, int quantity);
     }
 }
