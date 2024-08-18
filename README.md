@@ -37,3 +37,113 @@ graph TD
     I[Event Handler] -->|Update| H
     E -->|Consume Events| I
 ```
+
+## Class Diagram
+classDiagram
+    class ApplicationDbContext {
+        +DbSet~Product~ Products
+        +DbSet~User~ Users
+        +DbSet~Order~ Orders
+        +DbSet~OrderItem~ OrderItems
+        +DbSet~ShippingAddress~ ShippingAddresses
+        +DbSet~Cart~ Carts
+        +DbSet~CartItem~ CartItems
+        +DbSet~Review~ Reviews
+    }
+
+    class Product {
+        +int Id
+        +string Name
+        +string Description
+        +decimal Price
+        +int StockQuantity
+        +string Category
+        +List~string~ Images
+        +List~Review~ Reviews
+        +bool IsDeleted
+    }
+
+    class User {
+        +int Id
+        +string Email
+        +string PasswordHash
+        +string FirstName
+        +string LastName
+        +string Address
+        +string PhoneNumber
+        +string Role
+        +List~Order~ Orders
+        +Cart Cart
+        +bool IsDeleted
+    }
+
+    class Order {
+        +int Id
+        +int UserId
+        +DateTime OrderDate
+        +string Status
+        +decimal TotalAmount
+        +List~OrderItem~ Items
+        +ShippingAddress ShippingAddress
+        +bool IsDeleted
+    }
+
+    class OrderItem {
+        +int Id
+        +int OrderId
+        +int ProductId
+        +int Quantity
+        +decimal Price
+    }
+
+    class ShippingAddress {
+        +int Id
+        +int OrderId
+        +string FullName
+        +string AddressLine1
+        +string AddressLine2
+        +string City
+        +string State
+        +string PostalCode
+        +string Country
+    }
+
+    class Cart {
+        +int Id
+        +int UserId
+        +List~CartItem~ Items
+    }
+
+    class CartItem {
+        +int Id
+        +int CartId
+        +int ProductId
+        +int Quantity
+    }
+
+    class Review {
+        +int Id
+        +int ProductId
+        +int UserId
+        +int Rating
+        +string Comment
+        +DateTime CreatedAt
+    }
+
+    ApplicationDbContext "1" --> "*" Product : Contains
+    ApplicationDbContext "1" --> "*" User : Contains
+    ApplicationDbContext "1" --> "*" Order : Contains
+    ApplicationDbContext "1" --> "*" OrderItem : Contains
+    ApplicationDbContext "1" --> "*" ShippingAddress : Contains
+    ApplicationDbContext "1" --> "*" Cart : Contains
+    ApplicationDbContext "1" --> "*" CartItem : Contains
+    ApplicationDbContext "1" --> "*" Review : Contains
+
+    User "1" --> "*" Order : Places
+    User "1" --> "1" Cart : Has
+    Order "1" --> "*" OrderItem : Contains
+    Order "1" --> "1" ShippingAddress : Has
+    Cart "1" --> "*" CartItem : Contains
+    Product "1" --> "*" Review : Has
+    Product "1" --> "*" OrderItem : In
+    Product "1" --> "*" CartItem : In
