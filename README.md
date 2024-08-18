@@ -131,14 +131,14 @@ classDiagram
         +DateTime CreatedAt
     }
 
-    ApplicationDbContext "1" --> "*" Product : Contains
-    ApplicationDbContext "1" --> "*" User : Contains
-    ApplicationDbContext "1" --> "*" Order : Contains
-    ApplicationDbContext "1" --> "*" OrderItem : Contains
-    ApplicationDbContext "1" --> "*" ShippingAddress : Contains
-    ApplicationDbContext "1" --> "*" Cart : Contains
-    ApplicationDbContext "1" --> "*" CartItem : Contains
-    ApplicationDbContext "1" --> "*" Review : Contains
+    EntityModels "1" --> "*" Product : Contains
+    EntityModels "1" --> "*" User : Contains
+    EntityModels "1" --> "*" Order : Contains
+    EntityModels "1" --> "*" OrderItem : Contains
+    EntityModels "1" --> "*" ShippingAddress : Contains
+    EntityModels "1" --> "*" Cart : Contains
+    EntityModels "1" --> "*" CartItem : Contains
+    EntityModels "1" --> "*" Review : Contains
 
     User "1" --> "*" Order : Places
     User "1" --> "1" Cart : Has
