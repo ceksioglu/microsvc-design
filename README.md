@@ -41,7 +41,7 @@ graph TD
 ## Class Diagram
 ```mermaid
 classDiagram
-    class ApplicationDbContext {
+    class EntityModels {
         +DbSet~Product~ Products
         +DbSet~User~ Users
         +DbSet~Order~ Orders
