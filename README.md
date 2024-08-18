@@ -39,6 +39,7 @@ graph TD
 ```
 
 ## Class Diagram
+```mermaid
 classDiagram
     class ApplicationDbContext {
         +DbSet~Product~ Products
@@ -147,3 +148,4 @@ classDiagram
     Product "1" --> "*" Review : Has
     Product "1" --> "*" OrderItem : In
     Product "1" --> "*" CartItem : In
+```
