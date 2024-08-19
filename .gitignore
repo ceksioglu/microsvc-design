@@ -5,3 +5,6 @@ backend/WebAPI/obj/project.assets.json
 /backend/WebAPI/obj
 /backend/WebAPI/EventHandler/obj
 /backend/WebAPI/SagaOrchestrator/obj
+backend/WebAPI/SagaOrchestrator/obj/Debug/net8.0/SagaOrchestrator.AssemblyInfoInputs.cache
+*.cache
+*.cache
