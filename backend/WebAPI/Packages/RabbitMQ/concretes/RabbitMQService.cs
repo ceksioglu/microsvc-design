@@ -17,19 +17,22 @@ namespace WebAPI.Packages.RabbitMQ.concretes
             _channel = _connection.CreateModel();
         }
 
-        public void PublishMessage<T>(string exchange, string routingKey, T message, string exchangeType = ExchangeType.Direct)
+        public Task PublishMessage<T>(string exchange, string routingKey, T message, string exchangeType = ExchangeType.Direct)
         {
-            _channel.ExchangeDeclare(exchange, exchangeType, durable: true, autoDelete: false);
+            return Task.Run(() =>
+            {
+                _channel.ExchangeDeclare(exchange, exchangeType, durable: true, autoDelete: false);
 
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-            var properties = _channel.CreateBasicProperties();
-            properties.Persistent = true;
+                var properties = _channel.CreateBasicProperties();
+                properties.Persistent = true;
 
-            _channel.BasicPublish(exchange: exchange,
-                                  routingKey: routingKey,
-                                  basicProperties: properties,
-                                  body: body);
+                _channel.BasicPublish(exchange: exchange,
+                    routingKey: routingKey,
+                    basicProperties: properties,
+                    body: body);
+            });
         }
 
         public void ConsumeMessage<T>(string queueName, Func<T, Task> messageHandler)
