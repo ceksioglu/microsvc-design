@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Models
@@ -30,5 +32,8 @@ namespace WebAPI.Models
         public List<Review> Reviews { get; set; } = new List<Review>();
 
         public bool IsDeleted { get; set; } = false;
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
