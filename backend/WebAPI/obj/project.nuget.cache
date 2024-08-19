@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "gz+SWLTLj8OFj6v97GgnY1tmkym3x3biaIQ7EqJt2ePTpNG1KJzTYwHscml9AjJ6DlzwMRrlvQ7SUhiXZJNLow==",
+  "dgSpecHash": "yMqjd3R5flbCha6YSgpmDllqn94zo0aBMOq0IVvr6Q8NCMkSaVZFZ3SoPI3ypLxAHHqVB+zKO4w8GkRStuikfg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ceksi\\.nuget\\packages\\autofac\\8.0.0\\autofac.8.0.0.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\autofac.extensions.dependencyinjection\\9.0.0\\autofac.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.8\\microsoft.aspnetcore.authentication.jwtbearer.8.0.8.nupkg.sha512",

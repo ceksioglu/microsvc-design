@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "SSkKOsZrOfH01Wg0bAl2/IX5IuABGgekV9v07yYaUBOkXmijQNeTEroi7dK5QRrY/d9bvhNUF/ziwg2dCw8FJA==",
+  "dgSpecHash": "mbsQrkDudzSJxRar7u1O4Yao9tS+OPAw3iVOHF4yWPhnKY8ha85yMdyPAy5/Q17I+C6YUJ8Wb0jReeQbtbfIhg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\WebAPI\\AOP\\AOP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ceksi\\.nuget\\packages\\autofac\\8.0.0\\autofac.8.0.0.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\autofac.extensions.dependencyinjection\\9.0.0\\autofac.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "C:\\Users\\ceksi\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\ceksi\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
