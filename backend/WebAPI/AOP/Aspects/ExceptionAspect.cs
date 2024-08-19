@@ -10,22 +10,22 @@ namespace WebAPI.Aspects
     [PSerializable]
     public class ExceptionAspect : OnExceptionAspect
     {
-        private readonly ILogger<ExceptionAspect> _logger;
-
-        public ExceptionAspect(ILogger<ExceptionAspect> logger)
-        {
-            _logger = logger;
-        }
-
         public override void OnException(MethodExecutionArgs args)
         {
+            // Resolve the logger at runtime
+            var logger = args.Instance.GetType()
+                .GetField("_loggerFactory", BindingFlags.NonPublic | BindingFlags.Instance)
+                ?.GetValue(args.Instance) as ILoggerFactory;
+
+            var exceptionLogger = logger?.CreateLogger<ExceptionAspect>();
+
             var exception = args.Exception;
             var method = args.Method as MethodInfo;
             var methodName = method.Name;
             var className = method.DeclaringType.FullName;
 
             // Log the exception with detailed information
-            _logger.LogError(exception, 
+            exceptionLogger?.LogError(exception, 
                 "An exception occurred in {ClassName}.{MethodName}. " +
                 "Exception Type: {ExceptionType}. " +
                 "Message: {ExceptionMessage}. " +
