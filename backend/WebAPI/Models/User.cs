@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Models
@@ -34,5 +36,8 @@ namespace WebAPI.Models
         public Cart Cart { get; set; }
 
         public bool IsDeleted { get; set; } = false;
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
