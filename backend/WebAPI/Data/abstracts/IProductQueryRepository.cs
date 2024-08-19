@@ -1,12 +1,14 @@
-using WebAPI.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebAPI.DTO;
 
-namespace WebAPI.Data.abstracts;
-
-public interface IProductQueryRepository
+namespace WebAPI.Data.abstracts
 {
-    Task<Product> GetByIdAsync(int id);
-    Task<IEnumerable<Product>> GetAllAsync();
-    Task<IEnumerable<Product>> SearchAsync(string term);
-    Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);
-
+    public interface IProductQueryRepository
+    {
+        Task<ProductResponseDto> GetByIdAsync(int id);
+        Task<IEnumerable<ProductListItemDto>> GetAllAsync();
+        Task<IEnumerable<ProductListItemDto>> SearchAsync(string term);
+        Task<IEnumerable<ProductListItemDto>> GetProductsByCategoryAsync(string category);
+    }
 }
