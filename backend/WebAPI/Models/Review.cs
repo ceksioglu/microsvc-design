@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Models
@@ -21,5 +22,9 @@ namespace WebAPI.Models
 
         [Required]
         public DateTime CreatedAt { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }
