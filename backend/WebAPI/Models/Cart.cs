@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Models
@@ -11,6 +13,9 @@ namespace WebAPI.Models
         public User User { get; set; }
 
         public List<CartItem> Items { get; set; } = new List<CartItem>();
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 
     public class CartItem
@@ -25,5 +30,8 @@ namespace WebAPI.Models
         [Required]
         [Range(1, int.MaxValue)]
         public int Quantity { get; set; }
+
+        public DateTime AddedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
