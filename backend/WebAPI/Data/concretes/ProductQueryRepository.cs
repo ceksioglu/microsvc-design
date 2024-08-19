@@ -1,66 +1,93 @@
-using WebAPI.Models;
-using WebAPI.Data.abstracts;
-using WebAPI.Aspects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Data.abstracts;
+using WebAPI.DTO;
+using WebAPI.Models;
+using WebAPI.Aspects;
+using WebAPI.Packages.Redis.abstracts;
 
 namespace WebAPI.Data.concretes
 {
     public class ProductQueryRepository : IProductQueryRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILoggerFactory _loggerFactory;
+        private readonly IMapper _mapper;
+        private readonly IRedisService _redisService;
 
-        public ProductQueryRepository(ApplicationDbContext context, ILoggerFactory loggerFactory)
+        public ProductQueryRepository(
+            ApplicationDbContext context,
+            IMapper mapper,
+            IRedisService redisService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _redisService = redisService ?? throw new ArgumentNullException(nameof(redisService));
         }
 
         [LoggingAspect]
         [ExceptionAspect]
         [PerformanceAspect]
         [CachingAspect(300, "product:")]
-        public async Task<Product> GetByIdAsync(int id)
+        public async Task<ProductResponseDto> GetByIdAsync(int id)
         {
-            return await _context.Products
+            var product = await _context.Products
+                .AsNoTracking()
                 .Include(p => p.Reviews)
                 .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
+
+            return product != null ? _mapper.Map<ProductResponseDto>(product) : null;
         }
 
         [LoggingAspect]
+        [ExceptionAspect]
         [PerformanceAspect]
-        [CachingAspect(300, "all_products")]
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        [CachingAspect(300, "products:all")]
+        public async Task<IEnumerable<ProductListItemDto>> GetAllAsync()
         {
-            return await _context.Products
+            var products = await _context.Products
+                .AsNoTracking()
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
+
+            return _mapper.Map<IEnumerable<ProductListItemDto>>(products);
         }
 
         [LoggingAspect]
+        [ExceptionAspect]
         [PerformanceAspect]
-        public async Task<IEnumerable<Product>> SearchAsync(string term)
+        public async Task<IEnumerable<ProductListItemDto>> SearchAsync(string term)
         {
             if (string.IsNullOrWhiteSpace(term))
                 throw new ArgumentException("Search term cannot be empty.", nameof(term));
 
-            return await _context.Products
+            var products = await _context.Products
+                .AsNoTracking()
                 .Where(p => !p.IsDeleted &&
                             (p.Name.Contains(term) || p.Description.Contains(term)))
                 .ToListAsync();
+
+            return _mapper.Map<IEnumerable<ProductListItemDto>>(products);
         }
 
         [LoggingAspect]
+        [ExceptionAspect]
         [PerformanceAspect]
-        [CachingAspect(300, "products_by_category:")]
-        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category)
+        [CachingAspect(300, "products:category:")]
+        public async Task<IEnumerable<ProductListItemDto>> GetProductsByCategoryAsync(string category)
         {
             if (string.IsNullOrWhiteSpace(category))
                 throw new ArgumentException("Category cannot be empty.", nameof(category));
 
-            return await _context.Products
+            var products = await _context.Products
+                .AsNoTracking()
                 .Where(p => !p.IsDeleted && p.Category == category)
                 .ToListAsync();
+
+            return _mapper.Map<IEnumerable<ProductListItemDto>>(products);
         }
     }
 }
