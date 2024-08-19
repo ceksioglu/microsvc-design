@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI.csproj", "{5F74612A-FFCF-4849-BD78-9FE55DBCC5A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SagaOrchestrator", "SagaOrchestrator\SagaOrchestrator.csproj", "{CC4657D1-09ED-4B2C-9ED9-9FB8C99DABC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHandler", "EventHandler\EventHandler.csproj", "{95AF216A-120C-425E-BCEA-075A4C5667CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOP", "AOP\AOP.csproj", "{6170B742-2077-4CD8-8085-73211309EA10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F74612A-FFCF-4849-BD78-9FE55DBCC5A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F74612A-FFCF-4849-BD78-9FE55DBCC5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F74612A-FFCF-4849-BD78-9FE55DBCC5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F74612A-FFCF-4849-BD78-9FE55DBCC5A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4657D1-09ED-4B2C-9ED9-9FB8C99DABC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4657D1-09ED-4B2C-9ED9-9FB8C99DABC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4657D1-09ED-4B2C-9ED9-9FB8C99DABC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4657D1-09ED-4B2C-9ED9-9FB8C99DABC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95AF216A-120C-425E-BCEA-075A4C5667CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95AF216A-120C-425E-BCEA-075A4C5667CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95AF216A-120C-425E-BCEA-075A4C5667CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95AF216A-120C-425E-BCEA-075A4C5667CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6170B742-2077-4CD8-8085-73211309EA10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6170B742-2077-4CD8-8085-73211309EA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6170B742-2077-4CD8-8085-73211309EA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6170B742-2077-4CD8-8085-73211309EA10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -194,7 +194,6 @@ C:\Users\ceksi\OneDrive\Desktop\Portfolyo\Email\backend\email-webapp\WebAPI\obj\
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\Email\backend\email-webapp\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\testhost.exe
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\testhost.dll
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\appsettings.json
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\WebAPI.exe
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\WebAPI.deps.json
@@ -386,3 +385,11 @@ C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\obj\Deb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
