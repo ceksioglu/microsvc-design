@@ -1,33 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using WebAPI.Data.abstracts;
-using WebAPI.DTO;
+using WebAPI.Data.Abstracts;
 using WebAPI.Models;
 using WebAPI.Aspects;
 using WebAPI.Packages.Redis.abstracts;
 
-namespace WebAPI.Data.concretes
+namespace WebAPI.Data.Concretes
 {
     public class UserQueryRepository : IUserQueryRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly IMapper _mapper;
         private readonly IRedisService _redisService;
         private readonly ILogger<UserQueryRepository> _logger;
 
         public UserQueryRepository(
-            ApplicationDbContext context, 
-            IMapper mapper, 
+            ApplicationDbContext context,
             IRedisService redisService,
             ILogger<UserQueryRepository> logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _redisService = redisService ?? throw new ArgumentNullException(nameof(redisService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
@@ -36,15 +26,13 @@ namespace WebAPI.Data.concretes
         [ExceptionAspect]
         [PerformanceAspect]
         [CachingAspect(300, "user:")]
-        public async Task<UserResponseDto> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
             try
             {
-                var user = await _context.Users
+                return await _context.Users
                     .AsNoTracking()
                     .FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);
-
-                return user != null ? _mapper.Map<UserResponseDto>(user) : null;
             }
             catch (Exception ex)
             {
@@ -57,18 +45,16 @@ namespace WebAPI.Data.concretes
         [ExceptionAspect]
         [PerformanceAspect]
         [CachingAspect(300, "user:email:")]
-        public async Task<UserResponseDto> GetByEmailAsync(string email)
+        public async Task<User> GetByEmailAsync(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 throw new ArgumentException("Email cannot be null or empty.", nameof(email));
 
             try
             {
-                var user = await _context.Users
+                return await _context.Users
                     .AsNoTracking()
                     .FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
-
-                return user != null ? _mapper.Map<UserResponseDto>(user) : null;
             }
             catch (Exception ex)
             {
@@ -81,16 +67,14 @@ namespace WebAPI.Data.concretes
         [ExceptionAspect]
         [PerformanceAspect]
         [CachingAspect(300, "users:all")]
-        public async Task<IEnumerable<UserResponseDto>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
             try
             {
-                var users = await _context.Users
+                return await _context.Users
                     .AsNoTracking()
                     .Where(u => !u.IsDeleted)
                     .ToListAsync();
-
-                return _mapper.Map<IEnumerable<UserResponseDto>>(users);
             }
             catch (Exception ex)
             {
