@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Reflection;
+using WebAPI.Core.Exceptions;
 
 namespace WebAPI.Aspects
 {
@@ -49,7 +50,7 @@ namespace WebAPI.Aspects
                     else
                     {
                         // If it's not IActionResult, wrap it in a Task<ObjectResult>
-                        args.ReturnValue = Task.FromResult<object>(new ObjectResult(errorResponse) { StatusCode = (int)HttpStatusCode.InternalServerError });
+                        args.ReturnValue = Task.FromResult<object>(new ObjectResult(errorResponse) { StatusCode = (int)DetermineStatusCode(exception) });
                     }
                 }
                 else
@@ -66,7 +67,7 @@ namespace WebAPI.Aspects
             else
             {
                 // For other return types, wrap in ObjectResult
-                args.ReturnValue = new ObjectResult(errorResponse) { StatusCode = (int)HttpStatusCode.InternalServerError };
+                args.ReturnValue = new ObjectResult(errorResponse) { StatusCode = (int)DetermineStatusCode(exception) };
             }
 
             args.FlowBehavior = FlowBehavior.Return;
@@ -106,12 +107,15 @@ namespace WebAPI.Aspects
         {
             return exception switch
             {
-                UnauthorizedAccessException _ => HttpStatusCode.Unauthorized,
+                NotFoundException _ => HttpStatusCode.NotFound,
+                BadRequestException _ => HttpStatusCode.BadRequest,
+                UnauthorizedException _ => HttpStatusCode.Unauthorized,
+                ForbiddenException _ => HttpStatusCode.Forbidden,
+                ConflictException _ => HttpStatusCode.Conflict,
                 ArgumentException _ => HttpStatusCode.BadRequest,
-                KeyNotFoundException _ => HttpStatusCode.NotFound,
+                InvalidOperationException _ => HttpStatusCode.BadRequest,
                 NotImplementedException _ => HttpStatusCode.NotImplemented,
                 TimeoutException _ => HttpStatusCode.RequestTimeout,
-                // Add more custom exceptions here
                 _ => HttpStatusCode.InternalServerError
             };
         }
@@ -120,12 +124,15 @@ namespace WebAPI.Aspects
         {
             return exception switch
             {
-                UnauthorizedAccessException _ => "You are not authorized to perform this action.",
+                NotFoundException _ => exception.Message,
+                BadRequestException _ => exception.Message,
+                UnauthorizedException _ => "You are not authorized to perform this action.",
+                ForbiddenException _ => "You do not have permission to perform this action.",
+                ConflictException _ => exception.Message,
                 ArgumentException _ => "Invalid input provided.",
-                KeyNotFoundException _ => "The requested resource was not found.",
+                InvalidOperationException _ => "The requested operation is invalid.",
                 NotImplementedException _ => "This feature is not yet implemented.",
                 TimeoutException _ => "The operation timed out. Please try again later.",
-                // Add more custom exceptions here
                 _ => "An unexpected error occurred. Please try again later."
             };
         }
