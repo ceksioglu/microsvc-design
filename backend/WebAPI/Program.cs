@@ -7,14 +7,21 @@ using WebAPI.Data;
 using WebAPI.Auth;
 using StackExchange.Redis;
 using RabbitMQ.Client;
+using WebAPI.Services.Concretes;
+using Microsoft.AspNetCore.Identity;
 using WebAPI.Auth.abstracts;
 using WebAPI.Auth.concretes;
-using WebAPI.EventHandler;
+using WebAPI.Data.abstracts;
+using WebAPI.Data.Abstracts;
+using WebAPI.Data.concretes;
+using WebAPI.Data.Concretes;
+using WebAPI.Models;
 using WebAPI.Packages.RabbitMQ.abstracts;
 using WebAPI.Packages.RabbitMQ.concretes;
 using WebAPI.Packages.Redis.abstracts;
 using WebAPI.Packages.Redis.concretes;
-using WebAPI.SagaOrchestrator;
+using WebAPI.Services.abstracts;
+using WebAPI.Services.concretes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +35,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 builder.Services.AddSingleton(jwtSettings);
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -55,8 +64,25 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireCustomerRole", policy => policy.RequireRole("Customer"));
 });
 
+// Register repositories
+builder.Services.AddScoped<IProductCommandRepository, ProductCommandRepository>();
+builder.Services.AddScoped<IProductQueryRepository, ProductQueryRepository>();
+builder.Services.AddScoped<IUserCommandRepository, UserCommandRepository>();
+builder.Services.AddScoped<IUserQueryRepository, UserQueryRepository>();
+
 // Register services
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
+builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<ICartCommandService, CartCommandService>();
+builder.Services.AddScoped<ICartQueryService, CartQueryService>();
+builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();
+builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
+builder.Services.AddScoped<IReviewCommandService, ReviewCommandService>();
+builder.Services.AddScoped<IReviewQueryService, ReviewQueryService>();
 
 // Configure Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
@@ -77,8 +103,11 @@ builder.Services.AddSingleton<IConnection>(sp =>
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
 
 // Register OrderSaga and OrderEventHandler
-builder.Services.AddSingleton<OrderSaga>();
-builder.Services.AddSingleton<OrderEventHandler>();
+//builder.Services.AddSingleton<OrderSaga>();
+//builder.Services.AddSingleton<OrderEventHandler>();
+
+// Add HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
 
 // Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
@@ -112,16 +141,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
-
-// Start the Saga Orchestrator and Event Handler
-using (var scope = app.Services.CreateScope())
-{
-    var sagaOrchestrator = scope.ServiceProvider.GetRequiredService<OrderSaga>();
-    sagaOrchestrator.StartListening();
-
-    var eventHandler = scope.ServiceProvider.GetRequiredService<OrderEventHandler>();
-    eventHandler.StartListening();
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
