@@ -1,8 +1,8 @@
+using System.Reflection;
 using PostSharp.Aspects;
 using PostSharp.Serialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 using WebAPI.Auth.abstracts;
 
 namespace WebAPI.Aspects
@@ -88,13 +88,43 @@ namespace WebAPI.Aspects
 
             if (typeof(Task).IsAssignableFrom(methodInfo.ReturnType))
             {
-                args.ReturnValue = Task.FromResult(result);
+                if (methodInfo.ReturnType.IsGenericType)
+                {
+                    var genericType = methodInfo.ReturnType.GetGenericArguments()[0];
+                    if (typeof(IActionResult).IsAssignableFrom(genericType))
+                    {
+                        args.ReturnValue = Task.FromResult(result);
+                    }
+                    else
+                    {
+                        args.ReturnValue = Task.FromResult<object>(new ObjectResult(result) { StatusCode = GetStatusCode(result) });
+                    }
+                }
+                else
+                {
+                    args.ReturnValue = Task.CompletedTask;
+                }
             }
-            else
+            else if (typeof(IActionResult).IsAssignableFrom(methodInfo.ReturnType))
             {
                 args.ReturnValue = result;
             }
+            else
+            {
+                args.ReturnValue = new ObjectResult(result) { StatusCode = GetStatusCode(result) };
+            }
+            
             args.FlowBehavior = FlowBehavior.Return;
+        }
+
+        private int GetStatusCode(IActionResult result)
+        {
+            return result switch
+            {
+                UnauthorizedResult _ => StatusCodes.Status401Unauthorized,
+                ForbidResult _ => StatusCodes.Status403Forbidden,
+                _ => StatusCodes.Status400BadRequest
+            };
         }
     }
 }
