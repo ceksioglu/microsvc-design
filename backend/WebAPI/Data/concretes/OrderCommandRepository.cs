@@ -6,7 +6,6 @@ using WebAPI.Data.abstracts;
 using WebAPI.DTO;
 using WebAPI.Models;
 using WebAPI.Aspects;
-using WebAPI.Packages.RabbitMQ.abstracts;
 
 namespace WebAPI.Data.concretes
 {
@@ -14,16 +13,13 @@ namespace WebAPI.Data.concretes
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-        private readonly IRabbitMQService _rabbitMQService;
 
         public OrderCommandRepository(
             ApplicationDbContext context,
-            IMapper mapper,
-            IRabbitMQService rabbitMQService)
+            IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _rabbitMQService = rabbitMQService ?? throw new ArgumentNullException(nameof(rabbitMQService));
         }
 
         [LoggingAspect]
@@ -53,8 +49,6 @@ namespace WebAPI.Data.concretes
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-            await PublishOrderEvent("order_created", order);
-
             return _mapper.Map<OrderResponseDto>(order);
         }
 
@@ -74,8 +68,6 @@ namespace WebAPI.Data.concretes
 
             await _context.SaveChangesAsync();
 
-            await PublishOrderEvent("order_updated", order);
-
             return _mapper.Map<OrderResponseDto>(order);
         }
 
@@ -92,16 +84,7 @@ namespace WebAPI.Data.concretes
 
             await _context.SaveChangesAsync();
 
-            await PublishOrderEvent("order_deleted", id);
-
             return true;
-        }
-
-        [LoggingAspect]
-        [ExceptionAspect]
-        private async Task PublishOrderEvent(string eventType, object payload)
-        {
-            await _rabbitMQService.PublishMessage("order_events", eventType, payload);
         }
     }
 }
