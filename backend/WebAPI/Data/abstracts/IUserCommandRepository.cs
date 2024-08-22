@@ -1,12 +1,11 @@
-using System.Threading.Tasks;
-using WebAPI.DTO;
+using WebAPI.Models;
 
-namespace WebAPI.Data.abstracts
+namespace WebAPI.Data.Abstracts
 {
     public interface IUserCommandRepository
     {
-        Task<UserResponseDto> CreateAsync(UserCreateDto userDto);
-        Task<UserResponseDto> UpdateAsync(int id, UserUpdateDto userDto);
+        Task<User> CreateAsync(User user);
+        Task<User> UpdateAsync(int id, User user);
         Task<bool> DeleteAsync(int id);
     }
 }
