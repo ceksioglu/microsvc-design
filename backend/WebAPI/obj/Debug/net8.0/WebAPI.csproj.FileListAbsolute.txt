@@ -393,3 +393,4 @@ C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Deb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Debug\net8.0\.msCoverageSourceRootsMapping_WebAPI
