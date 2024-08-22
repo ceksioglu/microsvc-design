@@ -1,77 +1,57 @@
-using System;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using WebAPI.Data.abstracts;
-using WebAPI.DTO;
+using WebAPI.Data.Abstracts;
 using WebAPI.Models;
 using WebAPI.Aspects;
-using WebAPI.Packages.RabbitMQ.abstracts;
-using Microsoft.AspNetCore.Identity;
 
-namespace WebAPI.Data.concretes
+namespace WebAPI.Data.Concretes
 {
     public class UserCommandRepository : IUserCommandRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly IMapper _mapper;
-        private readonly IRabbitMQService _rabbitMQService;
-        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserCommandRepository(
-            ApplicationDbContext context, 
-            IMapper mapper, 
-            IRabbitMQService rabbitMQService,
-            IPasswordHasher<User> passwordHasher)
+        public UserCommandRepository(ApplicationDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _rabbitMQService = rabbitMQService ?? throw new ArgumentNullException(nameof(rabbitMQService));
-            _passwordHasher = passwordHasher ?? throw new ArgumentNullException(nameof(passwordHasher));
         }
 
         [LoggingAspect]
         [ExceptionAspect]
         [PerformanceAspect]
-        public async Task<UserResponseDto> CreateAsync(UserCreateDto userDto)
+        public async Task<User> CreateAsync(User user)
         {
-            if (userDto == null)
-                throw new ArgumentNullException(nameof(userDto));
-
-            var user = _mapper.Map<User>(userDto);
-            user.PasswordHash = _passwordHasher.HashPassword(user, userDto.Password);
-            user.Role = "Customer";
-            user.CreatedAt = DateTime.UtcNow;
-            user.UpdatedAt = DateTime.UtcNow;
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            await PublishUserEvent("user_created", user);
-
-            return _mapper.Map<UserResponseDto>(user);
+            return user;
         }
 
         [LoggingAspect]
         [ExceptionAspect]
         [PerformanceAspect]
-        public async Task<UserResponseDto> UpdateAsync(int id, UserUpdateDto userDto)
+        public async Task<User> UpdateAsync(int id, User user)
         {
-            if (userDto == null)
-                throw new ArgumentNullException(nameof(userDto));
-
-            var user = await _context.Users.FindAsync(id);
             if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            var existingUser = await _context.Users.FindAsync(id);
+            if (existingUser == null)
                 throw new KeyNotFoundException($"User with id {id} not found.");
 
-            _mapper.Map(userDto, user);
-            user.UpdatedAt = DateTime.UtcNow;
+            // Update properties manually
+            existingUser.Email = user.Email;
+            existingUser.FirstName = user.FirstName;
+            existingUser.LastName = user.LastName;
+            existingUser.Address = user.Address;
+            existingUser.PhoneNumber = user.PhoneNumber;
+            existingUser.PasswordHash = user.PasswordHash;
+            existingUser.Role = user.Role;
+            existingUser.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
-            await PublishUserEvent("user_updated", user);
-
-            return _mapper.Map<UserResponseDto>(user);
+            return existingUser;
         }
 
         [LoggingAspect]
@@ -88,16 +68,7 @@ namespace WebAPI.Data.concretes
 
             await _context.SaveChangesAsync();
 
-            await PublishUserEvent("user_deleted", id);
-
             return true;
-        }
-
-        [LoggingAspect]
-        [ExceptionAspect]
-        private async Task PublishUserEvent(string eventType, object payload)
-        {
-            await _rabbitMQService.PublishMessage("user_events", eventType, payload);
         }
     }
 }
