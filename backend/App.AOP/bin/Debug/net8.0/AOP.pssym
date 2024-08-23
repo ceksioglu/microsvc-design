@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Symbols LinesOfCode="254" PostSharpLinesOfCode="0" EnhancedTypesCount="5" SchemaVersion="1" PostSharpVersion="2024.1.5.0" xmlns="http://schemas.postsharp.org/2.0/symbols">
+  <Class Class="#1=T:[PostSharp]PostSharp.Serialization.PSerializableAttribute">
+    <Instance Declaration="#2=T:[AOP]AOP.Aspects.AuthorizationAspect" Id="2cf562e100008005">
+      <Target />
+    </Instance>
+    <Instance Declaration="#3=T:[AOP]AOP.Aspects.CachingAspect" Id="2cf562e100008006">
+      <Target />
+    </Instance>
+    <Instance Declaration="#4=T:[AOP]AOP.Aspects.ExceptionAspect" Id="2cf562e100008007">
+      <Target />
+    </Instance>
+    <Instance Declaration="#5=T:[AOP]AOP.Aspects.LoggingAspect" Id="2cf562e100008008">
+      <Target />
+    </Instance>
+    <Instance Declaration="#6=T:[AOP]AOP.Aspects.PerformanceAspect" Id="2cf562e100008009">
+      <Target />
+    </Instance>
+  </Class>
+</Symbols>
