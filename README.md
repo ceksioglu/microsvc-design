@@ -41,7 +41,31 @@ graph TD
 ## Class Diagram
 ```mermaid
 classDiagram
-    class ApplicationDbContext {
+    EntityRelationships --> Product : Contains
+    EntityRelationships --> User : Contains
+    EntityRelationships --> Order : Contains
+    EntityRelationships --> OrderItem : Contains
+    EntityRelationships --> ShippingAddress : Contains
+    EntityRelationships --> Cart : Contains
+    EntityRelationships --> CartItem : Contains
+    EntityRelationships --> Review : Contains
+    EntityRelationships --> CustomerSupportTicket : Contains
+
+    User "1" -- "*" Order : Places
+    User "1" -- "1" Cart : Has
+    User "1" -- "*" CustomerSupportTicket : Has
+    User "1" -- "*" Review : Writes
+
+    Order "1" -- "*" OrderItem : Contains
+    Order "1" -- "1" ShippingAddress : Has
+
+    Cart "1" -- "*" CartItem : Contains
+
+    Product "1" -- "*" Review : Has
+    Product "1" -- "*" OrderItem : Referenced in
+    Product "1" -- "*" CartItem : Referenced in
+
+    class EntityRelationships {
         +DbSet~Product~ Products
         +DbSet~User~ Users
         +DbSet~Order~ Orders
@@ -50,8 +74,8 @@ classDiagram
         +DbSet~Cart~ Carts
         +DbSet~CartItem~ CartItems
         +DbSet~Review~ Reviews
+        +DbSet~CustomerSupportTicket~ CustomerSupportTickets
     }
-
     class Product {
         +int Id
         +string Name
@@ -62,8 +86,9 @@ classDiagram
         +List~string~ Images
         +List~Review~ Reviews
         +bool IsDeleted
+        +DateTime CreatedAt
+        +DateTime UpdatedAt
     }
-
     class User {
         +int Id
         +string Email
@@ -76,8 +101,9 @@ classDiagram
         +List~Order~ Orders
         +Cart Cart
         +bool IsDeleted
+        +DateTime CreatedAt
+        +DateTime UpdatedAt
     }
-
     class Order {
         +int Id
         +int UserId
@@ -88,7 +114,6 @@ classDiagram
         +ShippingAddress ShippingAddress
         +bool IsDeleted
     }
-
     class OrderItem {
         +int Id
         +int OrderId
@@ -96,7 +121,6 @@ classDiagram
         +int Quantity
         +decimal Price
     }
-
     class ShippingAddress {
         +int Id
         +int OrderId
@@ -108,20 +132,21 @@ classDiagram
         +string PostalCode
         +string Country
     }
-
     class Cart {
         +int Id
         +int UserId
         +List~CartItem~ Items
+        +DateTime CreatedAt
+        +DateTime UpdatedAt
     }
-
     class CartItem {
         +int Id
         +int CartId
         +int ProductId
         +int Quantity
+        +DateTime AddedAt
+        +DateTime UpdatedAt
     }
-
     class Review {
         +int Id
         +int ProductId
@@ -129,23 +154,16 @@ classDiagram
         +int Rating
         +string Comment
         +DateTime CreatedAt
+        +DateTime UpdatedAt
+        +bool IsDeleted
     }
-
-    ApplicationDbContext "1" --> "*" Product : Contains
-    ApplicationDbContext "1" --> "*" User : Contains
-    ApplicationDbContext "1" --> "*" Order : Contains
-    ApplicationDbContext "1" --> "*" OrderItem : Contains
-    ApplicationDbContext "1" --> "*" ShippingAddress : Contains
-    ApplicationDbContext "1" --> "*" Cart : Contains
-    ApplicationDbContext "1" --> "*" CartItem : Contains
-    ApplicationDbContext "1" --> "*" Review : Contains
-
-    User "1" --> "*" Order : Places
-    User "1" --> "1" Cart : Has
-    Order "1" --> "*" OrderItem : Contains
-    Order "1" --> "1" ShippingAddress : Has
-    Cart "1" --> "*" CartItem : Contains
-    Product "1" --> "*" Review : Has
-    Product "1" --> "*" OrderItem : In
-    Product "1" --> "*" CartItem : In
+    class CustomerSupportTicket {
+        +int Id
+        +int UserId
+        +string Issue
+        +string Status
+        +string Resolution
+        +DateTime CreatedAt
+        +DateTime ResolvedAt
+    }
 ```
