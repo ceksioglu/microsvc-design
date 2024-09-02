@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\App.AOP\AOP.csproj" />
+        <ProjectReference Include="..\App.Core\Core.csproj" />
+        <ProjectReference Include="..\App.DataAccess\DataAccess.csproj" />
+        <ProjectReference Include="..\App.EventHandler\EventHandler.csproj" />
+
+    </ItemGroup>
+</Project>

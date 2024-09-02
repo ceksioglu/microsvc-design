@@ -1,7 +1,7 @@
 using AOP.Aspects;
+using DataAccess.DTO;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.DTO;
-using WebAPI.Services.abstracts;
+using Services.Services.abstracts;
 
 namespace WebAPI.Controller
 {

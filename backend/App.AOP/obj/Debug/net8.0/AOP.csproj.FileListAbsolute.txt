@@ -1,9 +1,3 @@
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.csproj.AssemblyReference.cache
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.AssemblyInfoInputs.cache
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.AssemblyInfo.cs
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.csproj.CoreCompileInputs.cache
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.sourcelink.json
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\bin\Debug\net8.0\AOP.pssym
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\bin\Debug\net8.0\AOP.pspdb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\bin\Debug\net8.0\AOP.deps.json
@@ -11,6 +5,12 @@ C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\bin\De
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\bin\Debug\net8.0\AOP.pdb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\bin\Debug\net8.0\Core.dll
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\bin\Debug\net8.0\Core.pdb
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.csproj.AssemblyReference.cache
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.AssemblyInfoInputs.cache
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.AssemblyInfo.cs
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.csproj.CoreCompileInputs.cache
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.sourcelink.json
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\PostSharp\touch
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\PostSharp\AdditionalBuildDependencies.txt
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.AOP\obj\Debug\net8.0\AOP.csproj.Up2Date

@@ -397,8 +397,8 @@ C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\WebAPI\bin\Deb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\.msCoverageSourceRootsMapping_WebAPI
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\WebAPI.pssym
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\WebAPI.pspdb
-C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\testhost.exe
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\testhost.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\testhost.exe
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\appsettings.Production.json
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\appsettings.Test.json
@@ -609,3 +609,10 @@ C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\obj
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\obj\Debug\net8.0\PostSharp\postsharp.app.config
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\DataAccess.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\EventHandler.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\Services.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\EventHandler.pdb
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\Services.pdb
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.WebApi\bin\Debug\net8.0\DataAccess.pdb
