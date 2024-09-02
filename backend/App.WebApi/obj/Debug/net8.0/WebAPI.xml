@@ -17,7 +17,7 @@
             <response code="200">Returns the user's cart.</response>
             <response code="404">If the cart is not found.</response>
         </member>
-        <member name="M:WebAPI.Controller.CartsController.AddToCart(WebAPI.DTO.CartItemCreateDto)">
+        <member name="M:WebAPI.Controller.CartsController.AddToCart(DataAccess.DTO.CartItemCreateDto)">
             <summary>
             Adds an item to the user's cart.
             </summary>
@@ -26,7 +26,7 @@
             <response code="200">Returns the updated cart.</response>
             <response code="400">If the item data is invalid.</response>
         </member>
-        <member name="M:WebAPI.Controller.CartsController.UpdateCartItem(System.Int32,WebAPI.DTO.CartItemUpdateDto)">
+        <member name="M:WebAPI.Controller.CartsController.UpdateCartItem(System.Int32,DataAccess.DTO.CartItemUpdateDto)">
             <summary>
             Updates the quantity of an item in the user's cart.
             </summary>
@@ -54,12 +54,64 @@
             <response code="204">If the cart was successfully cleared.</response>
             <response code="404">If the cart is not found.</response>
         </member>
+        <member name="T:WebAPI.Controller.CustomerSupportController">
+            <summary>
+            Controller for managing customer support tickets.
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controller.CustomerSupportController.#ctor(Services.Services.abstracts.ICustomerSupportService)">
+            <summary>
+            Initializes a new instance of the CustomerSupportController.
+            </summary>
+            <param name="customerSupportService">The customer support service.</param>
+        </member>
+        <member name="M:WebAPI.Controller.CustomerSupportController.CreateTicket(DataAccess.DTO.CustomerSupportTicketCreateDto)">
+            <summary>
+            Creates a new customer support ticket.
+            </summary>
+            <param name="ticketDto">The ticket information.</param>
+            <returns>The created ticket.</returns>
+            <response code="201">Returns the newly created ticket</response>
+            <response code="400">If the ticket data is invalid</response>
+            <response code="401">If the user is not authenticated</response>
+        </member>
+        <member name="M:WebAPI.Controller.CustomerSupportController.GetTicket(System.Int32)">
+            <summary>
+            Retrieves a specific customer support ticket.
+            </summary>
+            <param name="id">The ID of the ticket to retrieve.</param>
+            <returns>The requested ticket.</returns>
+            <response code="200">Returns the requested ticket</response>
+            <response code="404">If the ticket is not found</response>
+            <response code="401">If the user is not authenticated</response>
+        </member>
+        <member name="M:WebAPI.Controller.CustomerSupportController.ResolveTicket(System.Int32,System.String)">
+            <summary>
+            Resolves a customer support ticket.
+            </summary>
+            <param name="id">The ID of the ticket to resolve.</param>
+            <param name="resolution">The resolution details.</param>
+            <returns>The resolved ticket.</returns>
+            <response code="200">Returns the resolved ticket</response>
+            <response code="404">If the ticket is not found</response>
+            <response code="401">If the user is not authenticated</response>
+            <response code="403">If the user is not an admin</response>
+        </member>
+        <member name="M:WebAPI.Controller.CustomerSupportController.GetAllTickets">
+            <summary>
+            Retrieves all customer support tickets.
+            </summary>
+            <returns>A list of all tickets.</returns>
+            <response code="200">Returns the list of all tickets</response>
+            <response code="401">If the user is not authenticated</response>
+            <response code="403">If the user is not an admin</response>
+        </member>
         <member name="T:WebAPI.Controller.OrdersController">
             <summary>
             Manages order-related operations such as creation, retrieval, and status updates.
             </summary>
         </member>
-        <member name="M:WebAPI.Controller.OrdersController.CreateOrder(WebAPI.DTO.OrderCreateDto)">
+        <member name="M:WebAPI.Controller.OrdersController.CreateOrder(DataAccess.DTO.OrderCreateDto)">
             <summary>
             Creates a new order.
             </summary>
@@ -117,7 +169,7 @@
             Manages product-related operations such as creation, retrieval, update, and deletion.
             </summary>
         </member>
-        <member name="M:WebAPI.Controller.ProductsController.CreateProduct(WebAPI.DTO.ProductCreateDto)">
+        <member name="M:WebAPI.Controller.ProductsController.CreateProduct(DataAccess.DTO.ProductCreateDto)">
             <summary>
             Creates a new product.
             </summary>
@@ -142,7 +194,7 @@
             <returns>A list of all products.</returns>
             <response code="200">Returns the list of all products.</response>
         </member>
-        <member name="M:WebAPI.Controller.ProductsController.UpdateProduct(System.Int32,WebAPI.DTO.ProductUpdateDto)">
+        <member name="M:WebAPI.Controller.ProductsController.UpdateProduct(System.Int32,DataAccess.DTO.ProductUpdateDto)">
             <summary>
             Updates a product's information.
             </summary>
@@ -211,7 +263,7 @@
             Manages product review operations such as creating, updating, and retrieving reviews.
             </summary>
         </member>
-        <member name="M:WebAPI.Controller.ReviewsController.CreateReview(WebAPI.DTO.ReviewCreateDto)">
+        <member name="M:WebAPI.Controller.ReviewsController.CreateReview(DataAccess.DTO.ReviewCreateDto)">
             <summary>
             Creates a new review for a product.
             </summary>
@@ -244,7 +296,7 @@
             <returns>A list of reviews by the user.</returns>
             <response code="200">Returns the list of reviews by the user.</response>
         </member>
-        <member name="M:WebAPI.Controller.ReviewsController.UpdateReview(System.Int32,WebAPI.DTO.ReviewUpdateDto)">
+        <member name="M:WebAPI.Controller.ReviewsController.UpdateReview(System.Int32,DataAccess.DTO.ReviewUpdateDto)">
             <summary>
             Updates an existing review.
             </summary>
@@ -277,7 +329,7 @@
             Manages user-related operations such as registration, authentication, and profile management.
             </summary>
         </member>
-        <member name="M:WebAPI.Controller.UsersController.Register(WebAPI.DTO.UserCreateDto)">
+        <member name="M:WebAPI.Controller.UsersController.Register(DataAccess.DTO.UserCreateDto)">
             <summary>
             Registers a new user.
             </summary>
@@ -312,16 +364,16 @@
             <response code="200">Returns the list of all users.</response>
             <response code="403">If the user is not an administrator.</response>
         </member>
-        <member name="M:WebAPI.Controller.UsersController.UpdateUser(System.Int32,WebAPI.DTO.UserUpdateDto)">
+        <member name="M:WebAPI.Controller.UsersController.UpdateUser(System.Int32,DataAccess.DTO.UserUpdateDto)">
             <summary>
             Updates a user's information.
             </summary>
             <param name="id">The ID of the user to update.</param>
             <param name="userDto">The updated user information.</param>
             <returns>The updated user's information.</returns>
-            <response code="200">Returns the updated user.</response>
-            <response code="400">If the update data is invalid.</response>
-            <response code="404">If the user is not found.</response>
+            <response code="200">200 Returns the updated user.</response>
+            <response code="400">400 If the update data is invalid.</response>
+            <response code="404">404 If the user is not found.</response>
         </member>
         <member name="M:WebAPI.Controller.UsersController.DeleteUser(System.Int32)">
             <summary>
@@ -381,98 +433,6 @@
             <summary>
             The new password to set.
             </summary>
-        </member>
-        <member name="T:WebAPI.Migrations.InitialCreate">
-            <inheritdoc />
-        </member>
-        <member name="M:WebAPI.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebAPI.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebAPI.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductCommandService.CreateProductAsync(WebAPI.DTO.ProductCreateDto)">
-            <summary>
-            Creates a new product.
-            </summary>
-            <param name="productDto">The details of the product to create.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains the details of the created product.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductCommandService.UpdateProductAsync(System.Int32,WebAPI.DTO.ProductUpdateDto)">
-            <summary>
-            Updates an existing product.
-            </summary>
-            <param name="id">The ID of the product to update.</param>
-            <param name="productDto">The updated details of the product.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains the updated product details.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductCommandService.DeleteProductAsync(System.Int32)">
-            <summary>
-            Deletes a product.
-            </summary>
-            <param name="id">The ID of the product to delete.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains a boolean indicating if the deletion was successful.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductCommandService.UpdateStockQuantityAsync(System.Int32,System.Int32)">
-            <summary>
-            Updates the stock quantity of a product.
-            </summary>
-            <param name="id">The ID of the product to update.</param>
-            <param name="quantity">The new stock quantity.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains a boolean indicating if the update was successful.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductQueryService.GetProductByIdAsync(System.Int32)">
-            <summary>
-            Retrieves a product by its ID.
-            </summary>
-            <param name="id">The ID of the product to retrieve.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains the product details.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductQueryService.GetAllProductsAsync">
-            <summary>
-            Retrieves all products.
-            </summary>
-            <returns>A task that represents the asynchronous operation. The task result contains a collection of all products.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductQueryService.SearchProductsAsync(System.String)">
-            <summary>
-            Searches for products based on a given term.
-            </summary>
-            <param name="term">The search term.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains a collection of products matching the search term.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductQueryService.GetProductsByCategoryAsync(System.String)">
-            <summary>
-            Retrieves products by category.
-            </summary>
-            <param name="category">The category to filter by.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains a collection of products in the specified category.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductQueryService.IsInStockAsync(System.Int32,System.Int32)">
-            <summary>
-            Checks if a product is in stock for a given quantity.
-            </summary>
-            <param name="id">The ID of the product to check.</param>
-            <param name="quantity">The quantity to check for.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains a boolean indicating if the product is in stock.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductQueryService.GetFeaturedProductsAsync(System.Int32)">
-            <summary>
-            Retrieves featured products.
-            </summary>
-            <param name="count">The number of featured products to retrieve.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains a collection of featured products.</returns>
-        </member>
-        <member name="M:WebAPI.Services.abstracts.IProductQueryService.GetRelatedProductsAsync(System.Int32,System.Int32)">
-            <summary>
-            Retrieves products related to a given product.
-            </summary>
-            <param name="productId">The ID of the product to find related products for.</param>
-            <param name="count">The number of related products to retrieve.</param>
-            <returns>A task that represents the asynchronous operation. The task result contains a collection of related products.</returns>
         </member>
     </members>
 </doc>

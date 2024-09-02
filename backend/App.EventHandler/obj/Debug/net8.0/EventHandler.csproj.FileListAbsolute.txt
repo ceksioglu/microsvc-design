@@ -24,3 +24,6 @@ C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.EventHandl
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.EventHandler\obj\Debug\net8.0\refint\EventHandler.dll
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.EventHandler\obj\Debug\net8.0\EventHandler.pdb
 C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.EventHandler\obj\Debug\net8.0\ref\EventHandler.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.EventHandler\bin\Debug\net8.0\Core.dll
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.EventHandler\bin\Debug\net8.0\Core.pdb
+C:\Users\ceksi\OneDrive\Desktop\Portfolyo\microsvc-design\backend\App.EventHandler\obj\Debug\net8.0\EventHan.F16140B3.Up2Date

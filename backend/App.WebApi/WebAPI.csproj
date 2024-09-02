@@ -34,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Migrations\" />
+      <Folder Include="Extensions\" />
       <Folder Include="MQ\" />
       <Folder Include="Tests\" />
     </ItemGroup>
@@ -42,6 +42,9 @@
     <ItemGroup>
       <ProjectReference Include="..\App.AOP\AOP.csproj" />
       <ProjectReference Include="..\App.Core\Core.csproj" />
+        <ProjectReference Include="..\App.EventHandler\EventHandler.csproj" />
+        <ProjectReference Include="..\App.Services\Services.csproj" />
+        <ProjectReference Include="..\App.DataAccess\DataAccess.csproj" />
     </ItemGroup>
 
 </Project>

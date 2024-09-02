@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using AOP.Aspects;
+using DataAccess.DTO;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.DTO;
-using WebAPI.Services.abstracts;
+using Services.Services.abstracts;
 
 namespace WebAPI.Controller
 {
@@ -95,9 +95,9 @@ namespace WebAPI.Controller
         /// <param name="id">The ID of the user to update.</param>
         /// <param name="userDto">The updated user information.</param>
         /// <returns>The updated user's information.</returns>
-        /// <response code="200">Returns the updated user.</response>
-        /// <response code="400">If the update data is invalid.</response>
-        /// <response code="404">If the user is not found.</response>
+        /// <response code="200">200 Returns the updated user.</response>
+        /// <response code="400">400 If the update data is invalid.</response>
+        /// <response code="404">404 If the user is not found.</response>
         [HttpPut("{id}")]
         [AuthorizationAspect]
         [ProducesResponseType(typeof(UserResponseDto), StatusCodes.Status200OK)]

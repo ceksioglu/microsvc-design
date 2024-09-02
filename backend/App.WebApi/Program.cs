@@ -11,15 +11,18 @@ using Core.RabbitMQ.abstracts;
 using Core.RabbitMQ.concretes;
 using Core.Redis.abstracts;
 using Core.Redis.concretes;
-using WebAPI.Data;
+using DataAccess.Models;
+using DataAccess.Repositories;
+using DataAccess.Repositories.abstracts;
+using DataAccess.Repositories.concretes;
 using StackExchange.Redis;
 using RabbitMQ.Client;
 using Microsoft.AspNetCore.Identity;
-using WebAPI.Data.abstracts;
-using WebAPI.Data.concretes;
-using WebAPI.Models;
-using WebAPI.Services.abstracts;
-using WebAPI.Services.concretes;
+using Services.Services.abstracts;
+using Services.Services.concretes;
+using EventHandler.Handlers.abstracts;
+using EventHandler.Handlers.concretes;
+using EventHandler.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,13 +65,19 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireCustomerRole", policy => policy.RequireRole("Customer"));
 });
 
-// Register repositories
+// Add repositories
 builder.Services.AddScoped<IProductCommandRepository, ProductCommandRepository>();
 builder.Services.AddScoped<IProductQueryRepository, ProductQueryRepository>();
 builder.Services.AddScoped<IUserCommandRepository, UserCommandRepository>();
 builder.Services.AddScoped<IUserQueryRepository, UserQueryRepository>();
+builder.Services.AddScoped<ICartCommandRepository, CartCommandRepository>();
+builder.Services.AddScoped<ICartQueryRepository, CartQueryRepository>();
+builder.Services.AddScoped<IOrderCommandRepository, OrderCommandRepository>();
+builder.Services.AddScoped<IOrderQueryRepository, OrderQueryRepository>();
+builder.Services.AddScoped<IReviewCommandRepository, ReviewCommandRepository>();
+builder.Services.AddScoped<IReviewQueryRepository, ReviewQueryRepository>();
 
-// Register services
+// Add services
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
@@ -81,6 +90,13 @@ builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();
 builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
 builder.Services.AddScoped<IReviewCommandService, ReviewCommandService>();
 builder.Services.AddScoped<IReviewQueryService, ReviewQueryService>();
+
+// Add Event Processing Service
+builder.Services.AddHostedService<EventProcessingService>();
+// Add Event Publisher
+builder.Services.AddSingleton<IEventPublisher, EventPublisher>();
+// Add Event Handler
+builder.Services.AddScoped(typeof(IEventHandler<>), typeof(GenericEventHandler<>));
 
 // Configure Redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
@@ -100,9 +116,8 @@ builder.Services.AddSingleton<IConnection>(sp =>
 });
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
 
-// Register OrderSaga and OrderEventHandler
+// Register SAGA
 //builder.Services.AddSingleton<OrderSaga>();
-//builder.Services.AddSingleton<OrderEventHandler>();
 
 // Add HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
