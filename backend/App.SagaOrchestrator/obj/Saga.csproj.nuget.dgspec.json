@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\SagaOrchestrator.csproj": {}
+    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\Saga.csproj": {}
   },
   "projects": {
     "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.Core\\Core.csproj": {
@@ -154,12 +154,12 @@
         }
       }
     },
-    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\SagaOrchestrator.csproj": {
+    "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\Saga.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\SagaOrchestrator.csproj",
-        "projectName": "SagaOrchestrator",
-        "projectPath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\SagaOrchestrator.csproj",
+        "projectUniqueName": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\Saga.csproj",
+        "projectName": "Saga",
+        "projectPath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\Saga.csproj",
         "packagesPath": "C:\\Users\\ceksi\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\ceksi\\OneDrive\\Desktop\\Portfolyo\\microsvc-design\\backend\\App.SagaOrchestrator\\obj\\",
         "projectStyle": "PackageReference",

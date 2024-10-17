@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "App.Core\Core.cspro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHandler", "App.EventHandler\EventHandler.csproj", "{370BBE23-9955-4A2C-9C14-A6536BC7C335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SagaOrchestrator", "App.SagaOrchestrator\SagaOrchestrator.csproj", "{8ECF5389-2A63-4B1B-AAE3-D2804DD929C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saga", "App.SagaOrchestrator\Saga.csproj", "{8ECF5389-2A63-4B1B-AAE3-D2804DD929C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "App.WebApi\WebAPI.csproj", "{56A25BEB-DC39-45DE-9FC8-3E685DD8C394}"
 EndProject
